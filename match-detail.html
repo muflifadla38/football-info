@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Detail Team</title>
+    <meta name="description" content="Football Info" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/maskable-icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/maskable-icon-192.png">
+    <link rel="stylesheet" href="assets/css/materialize.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ef5350" />
+</head>
+
+<body>
+    <!-- Navigasi -->
+    <nav class="red lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo" id="logo-container">Football</a>
+            <a href="javascrit:void(0)" onclick="javascript:window.history.back(-1);return false;" class="sidenav-trigger" data-target="nav-mobile">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <ul class="topnav right hide-on-med-and-down"></ul>
+            <ul class="sidenav" id="nav-mobile"></ul>
+        </div>
+    </nav>
+    <!-- Akhir Navigasi -->
+
+    <div class="center-align" id="preloader">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-red-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fabFav" class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i id="iconFav" class="large material-icons">favorite_border</i>
+        </a>
+    </div>
+    <div class="container">
+        <div class="row card-panel red lighten-5 teal-text text-darken-3" style=" margin: 5em auto">
+            <div class="center-align">
+                <h5 id="matchDay" class="center-align"></h5>
+                <div id="kickOff" class="center-align"></div>
+                <div class="row center-align" style="margin:20px">
+                    <div class="col s5 truncate">
+                        <p id="homeTeamName" class="a-font-bold teal-text text-darken-2"></p>
+                    </div>
+                    <div class="col s2 center-align">
+                        <h6>VS</h6>
+                    </div>
+                    <div class="col s5 truncate">
+                        <p id="awayTeamName" class="a-font-bold teal-text text-darken-2"></p>
+                    </div>
+                </div>
+                <div id="venue" class="center-align"></div>
+                <div class="row center">
+                    <hr size="5px">
+                    <h6 class="center-align"></h6>
+                    <div class="center-align" id="numberOfMatches"></div>
+                    <div class="center-align" id="totalGoals"></div>
+                    <div class="col s4 right-align">
+                        <span id="homeTeamWins" class="a-font-bold teal-text text-darken-2"></span>
+                    </div>
+                    <div class="col s4">WINS</div>
+                    <div class="col s4 left-align">
+                        <span id="awayTeamWins" class="a-font-bold teal-text text-darken-2"></span>
+                    </div>
+
+                    <div class="col s4 right-align">
+                        <span id="homeTeamDraws" class="a-font-bold teal-text text-darken-2"></span>
+                    </div>
+                    <div class="col s4">DRAWS</div>
+                    <div class="col s4 left-align">
+                        <span id="awayTeamDraws" class="a-font-bold teal-text text-darken-2"></span>
+                    </div>
+
+                    <div class="col s4 right-align">
+                        <span id="homeTeamLosses" class="a-font-bold teal-text text-darken-2"></span>
+                    </div>
+                    <div class="col s4">LOSSES</div>
+                    <div class="col s4 left-align">
+                        <span id="awayTeamLosses" class="a-font-bold teal-text text-darken-2"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer red lighten-3">
+        <div class="container">
+            <h4 class="white-text center">Contact</h4>
+            <div class="row">
+                <ul class="center" style="margin-top: 2.5em;">
+                    <li class="col s12 m4"><a class="grey-text text-lighten-3" href="mailto:muflyfadlasyihab@gmail.com">muflyfadlasyihab@gmail.com</a></li>
+                    <li class="col s12 m4" style="margin:0.5em auto"><a class="grey-text text-lighten-3" href="https://twitter.com/muflifadla38">@muflifadla38</a></li>
+                    <li class="col s12 m4"><a class="grey-text text-lighten-3" href="https://line.me/ti/p/muflifadla38">muflifadla38</a></li>
+                </ul>
+            </div>
+            <div class="col l12 s12" style="margin-top: 2.5em;">
+                <p class="center-align" style="margin-bottom: 0">Copyright &copy; 2020, Mufli Fadla Syihab</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/materialize.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="sw-register.js"></script>
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/idb.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var idUrl = Number(urlParams.get("id"));
+            var isFavorit = false
+            checkData("matchFavorit", idUrl).then((msg) => {
+                console.log(msg)
+                document.getElementById("iconFav").classList.add('fas');
+                document.getElementById("iconFav").classList.add('fa-star');
+                document.getElementById("iconFav").innerHTML = "favorite"
+                getSavedDataById("match")
+                isFavorit = true
+            }).catch((msg) => {
+                console.log(msg)
+                document.getElementById("iconFav").classList.remove('fas');
+                document.getElementById("iconFav").classList.add('far');
+                document.getElementById("iconFav").classList.add('fa-star');
+                document.getElementById("iconFav").innerHTML = "favorite_border"
+                getMatchesDetails()
+                isFavorit = false
+            })
+
+            var iconFav = document.getElementById("iconFav");
+
+            iconFav.onclick = function() {
+                console.log("Tombol Favorit di klik.");
+                if (isFavorit) {
+                    deleteDatafav("matchFavorit", idUrl);
+                    isFavorit = false
+                } else {
+                    items = getMatchesDetails();
+                    items.then(function(match) {
+                        createDataFav("match", match);
+                    });
+                    isFavorit = true
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

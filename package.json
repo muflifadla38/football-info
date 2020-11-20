@@ -1,0 +1,15 @@
+{
+  "name": "football-submission-2",
+  "version": "1.0.0",
+  "description": "Submission 2 MPWA",
+  "main": "service-worker.js",
+  "dependencies": {
+    "web-push": "^3.4.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mufly Fadla Syihab",
+  "license": "ISC"
+}

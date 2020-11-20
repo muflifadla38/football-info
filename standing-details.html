@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Detail Team</title>
+    <meta name="description" content="Football Info" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/maskable-icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/maskable-icon-192.png">
+    <link rel="stylesheet" href="assets/css/materialize.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ef5350" />
+</head>
+
+<body>
+    <!-- Navigasi -->
+    <nav class="red lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo" id="logo-container">Football</a>
+            <a href="javascrit:void(0)" onclick="javascript:window.history.back(-1);return false;" class="sidenav-trigger" data-target="nav-mobile">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <ul class="topnav right hide-on-med-and-down"></ul>
+            <ul class="sidenav" id="nav-mobile"></ul>
+        </div>
+    </nav>
+    <!-- Akhir Navigasi -->
+
+    <div class="center-align" id="preloader">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-red-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fabFav" class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i id="iconFav" class="large material-icons">favorite_border</i>
+        </a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="center-align">
+                <h5 id="name"></h5>
+                <table>
+                    <tbody>
+                        <tr>
+                            <img id="crestUrl" alt="logo" height="100em" vspace="25">
+                        </tr>
+                        <tr>
+                            <td>Short Name</td>
+                            <td id="shortName"></td>
+                        </tr>
+                        <tr>
+                            <td>Tla</td>
+                            <td id="tla"></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td id="address"></td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td id="phone"></td>
+                        </tr>
+                        <tr>
+                            <td>Website</td>
+                            <td id="website"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td id="email"></td>
+                        </tr>
+                        <tr>
+                            <td>Founded</td>
+                            <td id="founded"></td>
+                        </tr>
+                        <tr>
+                            <td>Club Colors</td>
+                            <td id="clubColors"></td>
+                        </tr>
+                        <tr>
+                            <td>Venue</td>
+                            <td id="venue"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h5 class="center-align text-bold" style="margin: 1.5em auto;">Squad Details</h5>
+            <div id="squad" class="card-panel red lighten-4 teal-text text-darken-3"></div>
+        </div>
+    </div>
+
+    <footer class="page-footer red lighten-3 ">
+        <div class="container ">
+            <h4 class="white-text center ">Contact</h4>
+            <div class="row ">
+                <ul class="center " style="margin-top: 2.5em; ">
+                    <li class="col s12 m4 "><a class="grey-text text-lighten-3 " href="mailto:muflyfadlasyihab@gmail.com ">muflyfadlasyihab@gmail.com</a></li>
+                    <li class="col s12 m4 " style="margin:0.5em auto "><a class="grey-text text-lighten-3 " href="https://twitter.com/muflifadla38 ">@muflifadla38</a></li>
+                    <li class="col s12 m4 "><a class="grey-text text-lighten-3 " href="https://line.me/ti/p/muflifadla38 ">muflifadla38</a></li>
+                </ul>
+            </div>
+            <div class="col l12 s12 " style="margin-top: 2.5em; ">
+                <p class="center-align " style="margin-bottom: 0 ">Copyright &copy; 2020, Mufli Fadla Syihab</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/materialize.min.js "></script>
+    <script src="assets/js/jquery.min.js "></script>
+    <script src="assets/js/main.js "></script>
+    <script src="assets/js/api.js "></script>
+    <script src="sw-register.js "></script>
+    <script src="assets/js/database.js "></script>
+    <script src="assets/js/idb.js "></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var idUrl = Number(urlParams.get("id"));
+            var isFavorit = false
+            checkData("teamFavorit", idUrl).then((msg) => {
+                console.log(msg)
+                document.getElementById("iconFav").classList.add('fas');
+                document.getElementById("iconFav").classList.add('fa-star');
+                document.getElementById("iconFav").innerHTML = "favorite"
+                getSavedDataById("team")
+                isFavorit = true
+            }).catch((msg) => {
+                console.log(msg)
+                document.getElementById("iconFav").classList.remove('fas');
+                document.getElementById("iconFav").classList.add('far');
+                document.getElementById("iconFav").classList.add('fa-star');
+                document.getElementById("iconFav").innerHTML = "favorite_border"
+                getTeamDetails()
+                isFavorit = false
+            })
+
+            var iconFav = document.getElementById("iconFav");
+
+            iconFav.onclick = function() {
+                console.log("Tombol Favorit di klik.");
+                if (isFavorit) {
+                    deleteDatafav("teamFavorit", idUrl);
+                    isFavorit = false
+                } else {
+                    items = getTeamDetails();
+                    items.then(function(team) {
+                        createDataFav("team", team);
+                    });
+                    isFavorit = true
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>
