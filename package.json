@@ -4,6 +4,7 @@
   "description": "Submission 2 MPWA",
   "main": "service-worker.js",
   "dependencies": {
+    "firebase-tools": "^8.16.2",
     "web-push": "^3.4.4"
   },
   "devDependencies": {},
