@@ -284,7 +284,7 @@ function getFavoritTeam(data) {
                             <h5 class="center-align">
                                 <span class="center-align">  
                                     <img src="${team.crestUrl}" alt="logo" height="50em" vspace="25">
-                                    <br><a class="teal-text" href="./standing-detail.html?id=${team.id}">${team.name}</a>
+                                    <br><a class="teal-text" href="./standing-details.html?id=${team.id}">${team.name}</a>
                                 </span>
                             </h5>          
                         </div>
