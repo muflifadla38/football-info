@@ -28,12 +28,11 @@ if ('Notification' in window) {
     })
 }
 
-
 if (('PushManager' in window)) {
     navigator.serviceWorker.getRegistration().then(function(registration) {
         registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array("BF174qhwMzhDd2Sym8z1-hwVBdgV1y0vJFv9ZhMPlPQNPQ-Mv7J2FwpM0ZeqlsdEE8zM-9dETk3JBimWFw9CQI8")
+            applicationServerKey: urlBase64ToUint8Array("BCxGdewIa7dQn9igVdoSASl5aPnkNtkoVEhIroN1qrDdvnjXDeJ9ma_Xi88U9xnuHZzhYpS6k7Hid4QgNdkwJXs")
         }).then(function(subscribe) {
             console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
             console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(
