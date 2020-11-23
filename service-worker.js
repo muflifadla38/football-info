@@ -46,9 +46,9 @@ self.addEventListener("install", function(event) {
 });
 
 self.addEventListener("fetch", function(event) {
-    const onLine = navigator.onLine;
+    const online = navigator.onLine;
 
-    if (event.request.url.indexOf(api_url) > -1 && onLine) {
+    if (event.request.url.indexOf(api_url) > -1 && online) {
         event.respondWith(
             caches.open(CACHE_NAME).then(function(cache) {
                 return fetch(event.request).then(function(response) {
