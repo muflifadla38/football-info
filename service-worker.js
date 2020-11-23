@@ -7,7 +7,6 @@ var urlsToCache = [
     "/manifest.json",
     "/sw-register.js",
     "/service-worker.js",
-    "/push.js",
     "/match-detail.html",
     "/standing-details.html",
     "/pages/home.html",
