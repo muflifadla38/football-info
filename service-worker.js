@@ -46,7 +46,9 @@ self.addEventListener("install", function(event) {
 });
 
 self.addEventListener("fetch", function(event) {
-    if (event.request.url.indexOf(api_url) > -1) {
+    const online = navigator.online;
+
+    if (event.request.url.indexOf(api_url) > -1 && online) {
         event.respondWith(
             caches.open(CACHE_NAME).then(function(cache) {
                 return fetch(event.request).then(function(response) {
@@ -65,6 +67,7 @@ self.addEventListener("fetch", function(event) {
 });
 
 self.addEventListener("activate", function(event) {
+    clients.claim();
     event.waitUntil(
         caches.keys().then(function(cacheNames) {
             return Promise.all(
