@@ -24,6 +24,8 @@ if (workbox) {
         { url: '/assets/js/main.js', revision: '1' },
         { url: '/assets/js/jquery.min.js', revision: '1' },
         { url: '/assets/js/idb.js', revision: '1' },
+        { url: '/assets/js/team-favorit.js', revision: '1' },
+        { url: '/assets/js/match-favorit.js', revision: '1' },
         { url: '/assets/js/database.js', revision: '1' },
         { url: '/assets/img/stadium-1.jpg', revision: '1' },
         { url: '/assets/img/stadium-2.jpeg', revision: '1' },
